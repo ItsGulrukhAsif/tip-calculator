@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gratuity — Tip Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="site-header" role="banner">
+    <p class="eyebrow">Bill &amp; Tip</p>
+    <h1>Gra<em>tu</em>ity</h1>
+    <div class="header-rule" aria-hidden="true"></div>
+  </header>
+
+  <main>
+    <div class="card" role="main">
+      <div class="card-body">
+
+        <!-- ── INPUTS ─────────────────────────────────────── -->
+        <section class="inputs-panel" aria-label="Bill details">
+          <p class="section-label" aria-hidden="true">01 — Details</p>
+
+          <!-- Bill Amount -->
+          <div class="field-group">
+            <label for="bill">Bill Amount</label>
+            <div class="input-wrap">
+              <span class="input-prefix" aria-hidden="true">Rs</span>
+              <input
+                id="bill"
+                type="number"
+                class="has-prefix"
+                placeholder="0.00"
+                min="0.01"
+                step="0.01"
+                inputmode="decimal"
+                autocomplete="off"
+                aria-describedby="bill-error"
+                aria-invalid="false"
+              />
+            </div>
+            <div id="bill-error" class="field-error" role="alert" aria-live="polite"></div>
+          </div>
+
+          <!-- Tip % -->
+          <div class="field-group">
+            <label>Tip Percentage</label>
+            <div class="tip-row" role="group" aria-label="Tip preset buttons">
+              <button class="preset-btn" data-tip="10" type="button" aria-pressed="false">10%</button>
+              <button class="preset-btn" data-tip="15" type="button" aria-pressed="false">15%</button>
+              <button class="preset-btn" data-tip="20" type="button" aria-pressed="false">20%</button>
+              <button class="preset-btn custom-btn" id="custom-toggle" type="button" aria-pressed="false" aria-controls="custom-tip-wrap">Custom</button>
+            </div>
+            <div class="custom-tip-wrap" id="custom-tip-wrap">
+              <label for="tip-custom" class="sr-only">Custom tip percentage</label>
+              <div class="input-wrap">
+                <input
+                  id="tip-custom"
+                  type="number"
+                  class="has-suffix"
+                  placeholder="0"
+                  min="0"
+                  max="100"
+                  step="1"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  aria-describedby="tip-error"
+                  aria-invalid="false"
+                />
+                <span class="input-suffix" aria-hidden="true">%</span>
+              </div>
+            </div>
+            <div id="tip-error" class="field-error" role="alert" aria-live="polite"></div>
+          </div>
+
+          <!-- People -->
+          <div class="field-group">
+            <label for="people">Number of People</label>
+            <div class="input-wrap">
+              <input
+                id="people"
+                type="number"
+                placeholder="1"
+                min="1"
+                max="9999"
+                step="1"
+                inputmode="numeric"
+                autocomplete="off"
+                aria-describedby="people-error"
+                aria-invalid="false"
+              />
+            </div>
+            <div id="people-error" class="field-error" role="alert" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <!-- ── RESULTS ────────────────────────────────────── -->
+        <section class="results-panel" aria-label="Calculation results" aria-live="polite" aria-atomic="true">
+          <p class="section-label" aria-hidden="true">02 — Summary</p>
+
+          <div class="receipt" role="region" aria-label="Bill breakdown">
+            <div class="receipt-row">
+              <span class="row-label">Bill</span>
+              <span class="row-value" id="out-bill" aria-label="Bill amount">Rs 0.00</span>
+            </div>
+            <div class="receipt-row">
+              <span class="row-label">Tip (<span id="out-tip-pct">0</span>%)</span>
+              <span class="row-value" id="out-tip" aria-label="Tip amount">Rs 0.00</span>
+            </div>
+            <div class="receipt-row">
+              <span class="row-label">Total</span>
+              <span class="row-value" id="out-total" aria-label="Grand total">Rs 0.00</span>
+            </div>
+          </div>
+
+          <div class="receipt-hero" aria-live="polite" aria-label="Per person share">
+            <span class="hero-label">Per Person</span>
+            <span class="hero-amount" id="out-per-person">Rs 0.00</span>
+            <span class="hero-sub" id="hero-sub">— enter details above —</span>
+          </div>
+
+          <div class="rounding-note" id="rounding-note" aria-live="polite"></div>
+        </section>
+
+      </div><!-- /.card-body -->
+
+      <div class="card-divider" aria-hidden="true"></div>
+
+      <footer class="card-footer">
+        <p class="footer-note">Rounded up to nearest paisa • No group underpays</p>
+        <button class="reset-btn" id="reset-btn" type="button" aria-label="Reset all fields">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 8a6 6 0 1 0 1.5-3.9"/>
+            <polyline points="2,4 2,8 6,8"/>
+          </svg>
+          Reset
+        </button>
+      </footer>
+    </div><!-- /.card -->
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
